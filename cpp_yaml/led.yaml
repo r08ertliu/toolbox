@@ -1,0 +1,42 @@
+enabled_cmd: "ipmitool raw 0x06 0x52 17 0x20 0 0xd0 0x01"
+led_bdf:
+    - 0x000101 # Slot  0
+    - 0x000102 # Slot  1
+    - 0x000103 # Slot  2
+    - 0x000104 # Slot  3
+    - 0x200301 # Slot  4
+    - 0x200302 # Slot  5
+    - 0x200303 # Slot  6
+    - 0x200304 # Slot  7
+    - 0x400101 # Slot  8
+    - 0x400102 # Slot  9
+    - 0x400103 # Slot 10
+    - 0x400104 # Slot 11
+    - 0xA00301 # Slot 12
+    - 0xA00302 # Slot 13
+    - 0xA00303 # Slot 14
+    - 0xA00304 # Slot 15
+    - 0xC00101 # Slot 16
+    - 0xC00102 # Slot 17
+    - 0xC00103 # Slot 18
+    - 0xC00104 # Slot 19
+    - 0xE00301 # Slot 20
+    - 0xE00302 # Slot 21
+    - 0xE00303 # Slot 22
+    - 0xE00304 # Slot 23
+led_reg:
+    green:
+        addr: 0x71
+        mask: 0x03
+    amber:
+        addr: 0x70
+        mask: 0xC0
+led_state:
+    green:
+        off: 0x03
+        on: 0x01
+        blink: 0x02
+    amber:
+        off: 0xC0
+        on: 0x40
+        blink: 0x80
