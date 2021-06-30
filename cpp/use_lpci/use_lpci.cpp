@@ -40,7 +40,9 @@ int main()
 	// Query PCI device's parent
 	for (i=0; i<BDF_NUM; ++i) {
 		for (d=pacc->devices; d; d=d->next) {
-			if ((pci_read_byte(d, PCI_HEADER_TYPE) & 0x7f) != PCI_HEADER_TYPE_BRIDGE) {
+			uint8_t type = pci_read_byte(d, PCI_HEADER_TYPE) & 0x7f;
+			uint8_t subordinate = pci_read_byte(d, PCI_SUBORDINATE_BUS);
+			if (type != PCI_HEADER_TYPE_BRIDGE || subordinate < bdf[i].u8.bus) {
 				continue;
 			}
 
@@ -50,7 +52,7 @@ int main()
 
 			printf("Parent of %02x:%02x.%1x is %02x:%02x.%1x type = %02x\n",
 				bdf[i].u8.bus, bdf[i].u8.dev, bdf[i].u8.func,
-				d->bus, d->dev, d->func, pci_read_byte(d, PCI_HEADER_TYPE) & 0x7f);
+				d->bus, d->dev, d->func, type);
 		}
 	}
 
