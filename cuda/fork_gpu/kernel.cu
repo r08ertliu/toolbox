@@ -181,8 +181,14 @@ int main(int argc, char *argv[])
 	int numBlocks = (N + blockSize - 1) / blockSize;
 
 	char *end;
-	int dev_id = strtol(argv[argc-2], &end, 10);
-	int break_me = strtol(argv[argc-1], &end, 10);
+	int dev_id = 0;
+	int break_me = 0;
+
+	if (argc >= 2)
+		dev_id = strtol(argv[argc-2], &end, 10);
+
+	if (argc >= 3)
+		break_me = strtol(argv[argc-1], &end, 10);
 
 	printf("[%d]: Using device %d, break_me = %d\n", getpid(), dev_id, break_me);
 
