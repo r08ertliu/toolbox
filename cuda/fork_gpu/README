@@ -1,0 +1,10 @@
+sudo ./host [GPU num] [loop num]
+
+Default:
+	GPU num: 2
+	loop num: 500
+
+`Host` binary will fork [GPU num] processes to exec `kernel` binary.
+Test for [loop num] times.
+
+If GPU id == (loop round % GPU num) will launch breaker kernel, and other launch normal kernel.
