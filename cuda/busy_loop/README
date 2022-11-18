@@ -1,0 +1,15 @@
+# cuda busy loop kernel
+Occupy all 14 SMs and half of shared memory of NVIDIA T1000
+
+## Build
+
+    make
+
+## Run
+### Default mode (loop 1 sec)
+
+    ./busy_loop
+
+### Endless mode
+
+    ./busy_loop 1
