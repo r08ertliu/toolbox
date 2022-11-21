@@ -1,15 +1,33 @@
 # cuda busy loop kernel
-Occupy all 14 SMs and half of shared memory of NVIDIA T1000
+Run busy loop kernel with 48K of shared memory on NVIDIA T1000
 
 ## Build
 
     make
 
 ## Run
-### Default mode (loop 1 sec)
+
+### Options
+
+    -d, GPU device ID, default = 0
+    -n, GPU kernel block number, default = 14
+    -s, GPU kernel block size, default = 1024
+    -t, Loop time in second, default = 1, set 0 for endless
+    -h, Disaply usage
+
+### Default mode
 
     ./busy_loop
 
+    Device ID = 0
+    Block number = 14
+    Block size = 1024
+    Loop time = 1
+
 ### Endless mode
 
-    ./busy_loop 1
+    ./busy_loop -t 0
+
+    Device ID = 0
+    Block number = 14
+    Block size = 1024
