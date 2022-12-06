@@ -78,13 +78,15 @@ static void* signal_handler_thread(void *arg) {
 			continue;
 		}
 
-		printf("Got signal %d/%s\n", signal, strsignal(signal));
+		if (signal != SIGUSR1)
+			printf("Got signal %d/%s\n", signal, strsignal(signal));
 
 		switch (signal) {
 			case SIGINT:
 			case SIGABRT:
 			case SIGSEGV:
 			case SIGTERM:
+			case SIGUSR1:
 				*host_should_stop = true;
 				run_signal_thread = 0;
 				break;
@@ -104,6 +106,7 @@ static int start_signal_thread(pthread_t *sig_thread, sigset_t *set)
 	sigaddset(set, SIGABRT);
 	sigaddset(set, SIGSEGV);
 	sigaddset(set, SIGTERM);
+	sigaddset(set, SIGUSR1);
 
 	ret = pthread_sigmask(SIG_BLOCK, set, NULL);
 	if (ret != 0) {
@@ -227,7 +230,7 @@ int main(int argc, char *argv[])
 
 	signal_thread_ready = 1;
 	run_signal_thread = 0;
-	pthread_kill(sig_thread, SIGTERM);
+	pthread_kill(sig_thread, SIGUSR1);
 	pthread_join(sig_thread, NULL);
 
 	return 0;
